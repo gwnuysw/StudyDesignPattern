@@ -23,3 +23,13 @@ Iterator.prototype = {
         }
     }
 }
+var items = ["one", 2, "circle", true, "Applepie"];
+var iter = new Iterator(items);
+
+for (var item = iter.first(); iter.hasNext(); item = iter.next()) {
+  console.log(item);
+}
+
+iter.each(function(item){
+  console.log(item);
+});
