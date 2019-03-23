@@ -1,0 +1,6 @@
+#Written by FileProperties
+#
+#Fri Mar 22 13:48:23 KST 2019
+month=4
+year=2004
+day=21

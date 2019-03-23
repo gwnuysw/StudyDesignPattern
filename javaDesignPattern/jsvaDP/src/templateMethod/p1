@@ -1,0 +1,88 @@
+java.io.inputstream 클래스에서는 template method 패턴이 사용되고 있습니다. 사양서를 읽고 하위 클래스에서 구현할 메소드는 무엇인지 조사하시오.
+
+abstract Any	read_any()
+Reads an Any from this input stream.
+
+abstract void	read_boolean_array(boolean[] value, int offset, int length)
+Reads an array of booleans from this input stream.
+
+abstract boolean	read_boolean()
+Reads a boolean value from this input stream.
+
+abstract void	read_char_array(char[] value, int offset, int length)
+Reads an array of chars from this input stream.
+
+abstract char	read_char()
+Reads a char value from this input stream.
+
+abstract void	read_double_array(double[] value, int offset, int length)
+Reads an array of doubles from this input stream.
+
+abstract double	read_double()
+Reads a double value from this input stream.
+
+abstract void	read_float_array(float[] value, int offset, int length)
+Reads an array of floats from this input stream.
+
+abstract float	read_float()
+Reads a float value from this input stream.
+
+abstract void	read_long_array(int[] value, int offset, int length)
+Reads an array of CORBA longs (that is, Java ints) from this input stream.
+
+abstract int	read_long()
+Reads a CORBA long (that is, Java int) value from this input stream.
+
+abstract void	read_longlong_array(long[] value, int offset, int length)
+Reads an array of CORBA longlongs (that is, Java longs) from this input stream.
+
+abstract long	read_longlong()
+Reads a CORBA longlong (that is, Java long) value from this input stream.
+
+abstract Object	read_Object()
+Reads a CORBA object from this input stream.
+
+abstract void	read_octet_array(byte[] value, int offset, int length)
+Reads an array of octets (that is, bytes) from this input stream.
+
+abstract byte	read_octet()
+Reads an octet (that is, a byte) value from this input stream.
+
+abstract void	read_short_array(short[] value, int offset, int length)
+Reads an array of shorts from this input stream.
+
+abstract short	read_short()
+Reads a short value from this input stream.
+
+abstract String	read_string()
+Reads a string value from this input stream.
+
+abstract TypeCode	read_TypeCode()
+Reads a TypeCode from this input stream.
+
+abstract void	read_ulong_array(int[] value, int offset, int length)
+Reads an array of unsigned CORBA longs (that is, Java ints) from this input stream.
+
+abstract int	read_ulong()
+Reads an unsigned CORBA long (that is, Java int) value from this input stream.
+
+abstract void	read_ulonglong_array(long[] value, int offset, int length)
+Reads an array of unsigned CORBA longlongs (that is, Java longs) from this input stream.
+
+abstract long	read_ulonglong()
+Reads a CORBA unsigned longlong (that is, Java long) value from this input stream.
+
+abstract void	read_ushort_array(short[] value, int offset, int length)
+Reads an array of unsigned shorts from this input stream.
+
+abstract short	read_ushort()
+Reads a unsigned short value from this input stream.
+
+abstract void	read_wchar_array(char[] value, int offset, int length)
+Reads an array of wide chars from this input stream.
+
+abstract char	read_wchar()
+Reads a wide char value from this input stream.
+
+abstract String	read_wstring()
+Reads a wide string value from this input stream.
