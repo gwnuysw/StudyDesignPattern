@@ -7,7 +7,7 @@ import adapter.*;
 import factoryMethod.*;
 import iterator.*;
 import templateMethod.*;
-
+import builder.*;
 public class Main {
 
 	public static void main(String[] args) {
@@ -67,11 +67,38 @@ public class Main {
 //	    System.out.println(((IDcardFactory) factory).getOwnerCard("이순신"));
 //	    System.out.println(((IDcardFactory) factory).getOwnerCard("강감찬"));
 	    
-	    ticketMaker t = ticketMaker.getInstance();
-	    System.out.println(t.getNextNumber());
-	    System.out.println(t.getNextNumber());
-	    System.out.println(t.getNextNumber());
-	    System.out.println(t.getNextNumber());
+		/*singleton*/
+//	    ticketMaker t = ticketMaker.getInstance();
+//	    System.out.println(t.getNextNumber());
+//	    System.out.println(t.getNextNumber());
+//	    System.out.println(t.getNextNumber());
+//	    System.out.println(t.getNextNumber());
+		
+        if (args.length != 1) {
+            usage();
+            System.exit(0);
+        }
+        if (args[0].equals("plain")) {
+            Builder textbuilder = new TextBuilder();
+            //Director director = new Director(textbuilder);
+            //director.construct();
+            textbuilder.tpmethod(textbuilder);
+            String result = ((TextBuilder) textbuilder).getResult();
+            System.out.println(result);
+        } else if (args[0].equals("html")) {
+            HTMLBuilder htmlbuilder = new HTMLBuilder();
+            //Director director = new Director(htmlbuilder);
+            //director.construct();
+            htmlbuilder.tpmethod(htmlbuilder);
+            String filename = htmlbuilder.getResult();
+            System.out.println(filename + " is created.");
+        } else {
+            usage();
+            System.exit(0);
+        }
 	}
-
+    public static void usage() {
+        System.out.println("Usage: java Main plain normal text edit");
+        System.out.println("Usage: java Main html  HTML text edit");
+    }
 }
