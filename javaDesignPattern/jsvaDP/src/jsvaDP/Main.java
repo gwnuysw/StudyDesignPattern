@@ -2,11 +2,14 @@ package jsvaDP;
 
 import java.io.IOException;
 
+
 import Singleton.ticketMaker;
 import adapter.*;
 import factoryMethod.*;
-import iterator.*;
+//import iterator.*;
+import java.util.Iterator;
 import templateMethod.*;
+import visitor.*;
 import builder.*;
 public class Main {
 
@@ -20,6 +23,14 @@ public class Main {
 //		bookShelf.appendBook(new Book("Cinderella"));
 //		bookShelf.appendBook(new Book("Daddy-Long-Legs"));
 //
+//		while(it.hasNext()) {
+//			Book book = (Book)it.next();
+//			System.out.println(book.getName());
+//		}
+//		System.out.println("after remove-----");
+//		/*bookShelf객체를 it이 받고 bookshelf의 요소를 하나 지워도 it에 넘겨진 bookshelf객체에 반영된다. chain관계가 있는듯 하다.*/
+//		it = bookShelf.iterator();
+//		bookShelf.deleteBook();
 //		while(it.hasNext()) {
 //			Book book = (Book)it.next();
 //			System.out.println(book.getName());
@@ -74,27 +85,67 @@ public class Main {
 //	    System.out.println(t.getNextNumber());
 //	    System.out.println(t.getNextNumber());
 		
-        if (args.length != 1) {
-            usage();
-            System.exit(0);
-        }
-        if (args[0].equals("plain")) {
-            Builder textbuilder = new TextBuilder();
-            //Director director = new Director(textbuilder);
-            //director.construct();
-            textbuilder.tpmethod(textbuilder);
-            String result = ((TextBuilder) textbuilder).getResult();
-            System.out.println(result);
-        } else if (args[0].equals("html")) {
-            HTMLBuilder htmlbuilder = new HTMLBuilder();
-            //Director director = new Director(htmlbuilder);
-            //director.construct();
-            htmlbuilder.tpmethod(htmlbuilder);
-            String filename = htmlbuilder.getResult();
-            System.out.println(filename + " is created.");
-        } else {
-            usage();
-            System.exit(0);
+		/*builder*/
+//        if (args.length != 1) {
+//            usage();
+//            System.exit(0);
+//        }
+//        if (args[0].equals("plain")) {
+//            Builder textbuilder = new TextBuilder();
+//            //Director director = new Director(textbuilder);
+//            //director.construct();
+//            textbuilder.tpmethod(textbuilder);
+//            String result = ((TextBuilder) textbuilder).getResult();
+//            System.out.println(result);
+//        } else if (args[0].equals("html")) {
+//            HTMLBuilder htmlbuilder = new HTMLBuilder();
+//            //Director director = new Director(htmlbuilder);
+//            //director.construct();
+//            htmlbuilder.tpmethod(htmlbuilder);
+//            String filename = htmlbuilder.getResult();
+//            System.out.println(filename + " is created.");
+//        } else {
+//            usage();
+//            System.exit(0);
+//        }
+		
+		try {
+            Directory rootdir = new Directory("root");
+            Directory bindir = new Directory("bin");
+            Directory tmpdir = new Directory("tmp");
+            Directory usrdir = new Directory("usr");
+            rootdir.add(bindir);
+            rootdir.add(tmpdir);
+            rootdir.add(usrdir);
+            bindir.add(new File("vi", 10000));
+            bindir.add(new File("latex", 20000));
+
+            Directory Kim = new Directory("Kim");
+            Directory Lee = new Directory("Lee");
+            Directory Park = new Directory("Park ");
+            usrdir.add(Kim);
+            usrdir.add(Lee); 
+            usrdir.add(Park);
+            Kim.add(new File("diary.html", 100));
+            Kim.add(new File("Composite.java", 200));
+            Kim.add(new File("hyejaKim.txt", 150));
+            Lee.add(new File("memo.tex", 300));
+            Lee.add(new File("index.html", 350));
+            Lee.add(new File("Leehyeja.txt", 325));
+            Park.add(new File("game.doc", 400));
+            Park.add(new File("junk.mail", 500));
+            Park.add(new File("Parkhyeja.txt", 450));
+
+            FileNameFindVisitor ffv = new FileNameFindVisitor("hyeja"); 
+            rootdir.accept(ffv);                            
+
+            Iterator it = ffv.getFoundFiles();                
+            while (it.hasNext()) {                          
+                File file = (File)it.next();                    
+                System.out.println(file.toString());           
+            }                                            
+        } catch (FileTreatmentException e) {
+            e.printStackTrace();
         }
 	}
     public static void usage() {
