@@ -1,8 +1,8 @@
 public class OddSupport extends Support {
-    public OddSupport(String name) {                // 생성자 
+    public OddSupport(String name) {            
         super(name);
     }
-    protected boolean resolve(Trouble trouble) {      // 해결용 메소드
+    protected boolean resolve(Trouble trouble) {     
         if (trouble.getNumber() % 2 == 1) {
             return true;
         } else {

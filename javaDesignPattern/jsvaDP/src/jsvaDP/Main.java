@@ -8,6 +8,8 @@ import adapter.*;
 import factoryMethod.*;
 //import iterator.*;
 import java.util.Iterator;
+
+import ChainOfResponsibility.*;
 import templateMethod.*;
 import visitor.*;
 import builder.*;
@@ -109,47 +111,61 @@ public class Main {
 //            System.exit(0);
 //        }
 		
-		try {
-            Directory rootdir = new Directory("root");
-            Directory bindir = new Directory("bin");
-            Directory tmpdir = new Directory("tmp");
-            Directory usrdir = new Directory("usr");
-            rootdir.add(bindir);
-            rootdir.add(tmpdir);
-            rootdir.add(usrdir);
-            bindir.add(new File("vi", 10000));
-            bindir.add(new File("latex", 20000));
-
-            Directory Kim = new Directory("Kim");
-            Directory Lee = new Directory("Lee");
-            Directory Park = new Directory("Park ");
-            usrdir.add(Kim);
-            usrdir.add(Lee); 
-            usrdir.add(Park);
-            Kim.add(new File("diary.html", 100));
-            Kim.add(new File("Composite.java", 200));
-            Kim.add(new File("hyejaKim.txt", 150));
-            Lee.add(new File("memo.tex", 300));
-            Lee.add(new File("index.html", 350));
-            Lee.add(new File("Leehyeja.txt", 325));
-            Park.add(new File("game.doc", 400));
-            Park.add(new File("junk.mail", 500));
-            Park.add(new File("Parkhyeja.txt", 450));
-
-            FileNameFindVisitor ffv = new FileNameFindVisitor("hyeja"); 
-            rootdir.accept(ffv);                            
-
-            Iterator it = ffv.getFoundFiles();                
-            while (it.hasNext()) {                          
-                File file = (File)it.next();                    
-                System.out.println(file.toString());           
-            }                                            
-        } catch (FileTreatmentException e) {
-            e.printStackTrace();
+		/*visitor*/
+//		try {
+//            Directory rootdir = new Directory("root");
+//            Directory bindir = new Directory("bin");
+//            Directory tmpdir = new Directory("tmp");
+//            Directory usrdir = new Directory("usr");
+//            rootdir.add(bindir);
+//            rootdir.add(tmpdir);
+//            rootdir.add(usrdir);
+//            bindir.add(new File("vi", 10000));
+//            bindir.add(new File("latex", 20000));
+//
+//            Directory Kim = new Directory("Kim");
+//            Directory Lee = new Directory("Lee");
+//            Directory Park = new Directory("Park ");
+//            usrdir.add(Kim);
+//            usrdir.add(Lee); 
+//            usrdir.add(Park);
+//            Kim.add(new File("diary.html", 100));
+//            Kim.add(new File("Composite.java", 200));
+//            Kim.add(new File("hyejaKim.txt", 150));
+//            Lee.add(new File("memo.tex", 300));
+//            Lee.add(new File("index.html", 350));
+//            Lee.add(new File("Leehyeja.txt", 325));
+//            Park.add(new File("game.doc", 400));
+//            Park.add(new File("junk.mail", 500));
+//            Park.add(new File("Parkhyeja.txt", 450));
+//
+//            FileNameFindVisitor ffv = new FileNameFindVisitor("hyeja"); 
+//            rootdir.accept(ffv);                           
+//
+//            Iterator it = ffv.getFoundFiles();                
+//            while (it.hasNext()) {                          
+//                File file = (File)it.next();                    
+//                System.out.println(file.toString());           
+//            }                                            
+//        } catch (FileTreatmentException e) {
+//            e.printStackTrace();
+//        }
+		
+		/*Chain of Responsibility*/
+		Support seokwon = new HwSupport("seokwon");
+		Support alice     = new NoSupport("Alice");
+        Support bob     = new LimitSupport("Bob", 100);
+        Support charlie   = new SpecialSupport("Charlie", 429);
+        Support diana    = new LimitSupport("Diana", 200);
+        Support elmo    = new OddSupport("Elmo");
+        Support fred     = new LimitSupport("Fred", 300);
+        seokwon.setNext(alice).setNext(bob).setNext(charlie).setNext(diana).setNext(elmo).setNext(fred);
+        for (int i = 0; i < 500; i += 1) {
+            seokwon.support(new Trouble(i));
         }
 	}
-    public static void usage() {
-        System.out.println("Usage: java Main plain normal text edit");
-        System.out.println("Usage: java Main html  HTML text edit");
-    }
+//    public static void usage() {
+//        System.out.println("Usage: java Main plain normal text edit");
+//        System.out.println("Usage: java Main html  HTML text edit");
+//    }
 }
